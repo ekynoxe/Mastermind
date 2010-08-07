@@ -1,5 +1,6 @@
 A very simnple offline mastermind game created for http://js1k.com/
 The minified entry version is mini.html
+Play at http://mastermind.ekynoxe.com/
 
 Code inspired from the rspec book: http://www.pragprog.com/titles/achbd/the-rspec-book
 
