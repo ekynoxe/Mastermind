@@ -5,6 +5,6 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<script>var i=j=0,g=[],x=(Math.random()+'').slice(2,6).split(''),m= {48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9"};function o(s){document.body.innerHTML+=s};o('4xGuess(0-9)<br/>*');function w(s,n){p='';for(n;n--;)p+=s;return p;}function a(){return c(x.slice())-b();}function b(){p=0;for(j in g)if(g[j]==x[j])p+=1;return p;}function c(a){p=0;for(j in g){if(found=h(a,g[j])){a.splice(found,1);p+=1;}}return p;}function h(q,r){for(e in q){if(r==q[e])return e;}return false;}function y(){alert('You won!');window.location.reload();}function l(){f=w('+',b())+w('-',a());f=='++++'?y():null;return ' '+f;}function k(c){p=c.keyCode;if(p>47&&p<58){g[i]=m[p];o(p-48);if(++i==4){o(l()+'<br/>* ');i=0;}}}onkeyup=k</script>
+		<script>var i=j=0,g=[],x=(Math.random()+'').slice(2,6).split(''),m={48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9"};function o(s){document.body.innerHTML+=s};o('4xGuess(0-9)<br/>*');function w(s,n){p='';for(n;n--;)p+=s;return p;}function a(){return c(x.slice())-b();}function b(){p=0;for(j in g)if(g[j]==x[j])p+=1;return p;}function c(a){p=0;for(j in g){if(found=h(a,g[j])){a.splice(found,1);p+=1;}}return p;}function h(q,r){for(e in q){if(r==q[e])return e;}return false;}function y(){alert('You won!');window.location.reload();}function l(){f=w('+',b())+w('-',a());f=='++++'?y():null;return ' '+f;}function k(c){p=c.keyCode;if(p>47&&p<58){g[i]=m[p];o(p-48);if(++i==4){o(l()+'<br/>* ');i=0;}}}onkeyup=k</script>
 </body>
 </html>
