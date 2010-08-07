@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Javascript Mastermind - Mathieu Davy - 08 2010</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<script>
+/*
+ * A very simnple offline mastermind game created for http://js1k.com/
+ * Code inspired from the rspec book: http://www.pragprog.com/titles/achbd/the-rspec-book
+ * Tested on OS X 10.5.8 in:
+ * 		* Firefox 3.6.2
+ * 		* Safari 4.0.5
+ * 		* Chrome 5.0.375.125
+ * 		* Opera 10.60
+ * 
+ * RULES:
+ * Guess by submitting with your keyboard numbers from 0-9
+ * After pressing 4 digits the guess is automatically submitted
+ * The result shows symbols:
+ * 		* no symbol means no digit is in the code to guess
+ * 		* a '-' means one of the digits is in the code to guess, but not a the correct place
+ * 		* a '+' means one of the digits is in the code to guess, AND a the correct place
+ * If a digit exists twice in the code to guess, symbols do not represent it, you will have 
+ * to get it by yourself!
+ * An alert is displayed when the code is found, and the game reset
+ */
+
+//initialising vars
+		var i=0,
+			j=0,
+			guess=[],
+			code=(Math.random()+'').slice(2,6).split(''),
+			keymap= {48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9"};
+			
+// print stuff out
+		function out(s){document.body.innerHTML+=s};
+		
+// explain the rules
+// for debug, we also printing the code in a non visible span => use firebug or similar to see it
+		out('Play mastermind by submitting guesses of 4 digits in the 0-9 range.<br/>A \'+\' means one of your digits is correctly placed, a \'-\' means you have a correct digit but not a the wrong place.<br/>Simply enter 4 numbers below:<span style="display:none">'+code+'</span><br/>*');
+
+// formatter for outputting the indicator
+		function buildpattern(sym,nb){
+			temp='';
+			for(nb;nb--;){
+				temp += sym;
+			}
+			return temp;
+		}
+		
+// calculates the number of correct digits wrongly placed
+		function number_match_count(){
+			return total_match_count(code.slice()) - exact_match_count();
+		}
+		
+// calculates the number of correct digits correctly placed
+		function exact_match_count(){
+			exact_match_nb = 0;
+			for(j in guess)
+				if(guess[j]==code[j])
+					exact_match_nb += 1;
+			return exact_match_nb;
+		}
+		
+// calculates the total number of matches for a digit in the code
+		function total_match_count(a){
+			number_match_nb=0;
+			for(j in guess){
+				if(found = include(a,guess[j])){
+					a.splice(found,1);
+					number_match_nb +=1;
+				}
+			}
+			return number_match_nb;
+		}
+		
+// returns the index of search in array arr, if found, otherwise returns false
+		function include(arr,search){
+			for(e in arr){
+				if(search==arr[e])
+					return e;
+			}
+			return false;
+		}
+		
+// displays winning alert message and resets game by redirecting
+		function won(){
+			alert('You won!');
+			window.location.reload();
+		}
+		
+// checks the 4-digits guess against the code
+		function check(){
+			returnstring=buildpattern('+',exact_match_count()) + buildpattern('-',number_match_count());
+			returnstring=='++++'?won():null;
+			return ' '+returnstring;
+		}
+		
+// processing code on key entry
+		function getchar(c){
+			p=c.keyCode;
+			if(p>47&&p<58){
+				guess[i]=keymap[p];
+				out(p-48);
+				if(++i==4){
+					out(check()+'<br/>* ');
+					i=0;
+				}
+			}
+		}
+		
+// register keyup event function
+		onkeyup=getchar
+		</script>
+	</body>
+</html>
